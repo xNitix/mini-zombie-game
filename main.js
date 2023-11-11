@@ -4,19 +4,35 @@ let hpsContainer = document.querySelector('.hpsContainer');
 let pointsContainer = document.querySelector('.pointsContainer');
 let zombieContainer = document.querySelector('.zombieContainer');
 let resultContainer = document.querySelector('.resultContainer');
+let result = document.querySelector('.result');
+let playAgain = document.querySelector('.endButton');
 
-let score = 0;
-let lives = 3;
-let points = 33;
+let score;
+let lives;
+let points;
 let pointsString;
-let end = 1;
-let shoot = 1;
-let lvl = 0;
-let lvlStep = 300;
+let end;
+let shoot;
+let lvl;
+let lvlStep;
 
 startGameButton.addEventListener('click', startGame);
+playAgain.addEventListener('click', reGame);
+
+function setVariables()
+{
+    score = 0;
+    lives = 3;
+    points = 33;
+    pointsString;
+    end = 1;
+    shoot = 1;
+    lvl = 0;
+    lvlStep = 300;
+}
 
 function startGame() {
+    setVariables();
     startContainer.style.display = 'none';
     hpsContainer.style.display = 'flex';
     pointsContainer.style.display = 'flex';
@@ -34,7 +50,7 @@ function spawnZombie() {
     }
 
     let zombie = new Image();
-    let zombieSize = getRandomZombieSize(); // Funkcja do losowania rozmiaru zombie
+    let zombieSize = getRandomZombieSize();
     zombie.classList.add("patient0");
     zombie.draggable = false;
 
@@ -55,17 +71,14 @@ function spawnZombie() {
 }
 
 function getRandomZombieSize() {
-    // Losowa szerokość i wysokość dla zombiaka (np. od 50 do 150 pikseli)
     return Math.floor(Math.random() * (600 - 100 + 1) + 100);
 }
 
 function getRandomYPosition() {
-    // Losowa wysokość od 0 do wysokości okna przeglądarki
     return Math.floor(Math.random() * (20 - 2 + 1)+ 2); 
 }
 
 function getRandomSpeed() {
-    // Losowa prędkość od minSpeed do maxSpeed
     if(points > lvlStep)
     {
         lvl += 1;
@@ -78,23 +91,21 @@ function animateZombie(zombie, xPos, speed) {
     // Animacja poruszania zombie w lewo
     let indx = 9;
     let frameMove = 10;
+    let animationId;
 
     zombie.addEventListener('click', function () {
         if (points >= 0 && shoot == 1)
         {
             clicked = true;
             pnkts10();
-            stopZombieAnimation();// Zatrzymanie animacji tylko dla tego zombiaka
+            stopZombieAnimation();
             zombie.remove();
         }
     })
 
-    // Funkcja do zatrzymania animacji zombiaka
     function stopZombieAnimation() {
-        cancelAnimationFrame(animationId); // Zatrzymuje animację tylko dla tego zombiaka
+        cancelAnimationFrame(animationId); // Zatrzymuje animację tylko dla jednego, danego zombii
     }
-
-    let animationId;
 
     const frame = () => {
         if(end == 1){   
@@ -121,7 +132,7 @@ function animateZombie(zombie, xPos, speed) {
             animationId = requestAnimationFrame(frame);
 
         }
-    };
+    }
 
     frame();
 }
@@ -136,7 +147,6 @@ function loseLife() {
 }
 
 function updateHearts() {
-    // Aktualizacja ilości serc (hearts) na ekranie
     let hearts = document.querySelectorAll('.heart_ic');
 
     for (let i = 0; i < hearts.length; i++) {
@@ -161,13 +171,11 @@ function plusPnkts() {
 
 function minusPnkt()
 {
-
     points -= 3;
     if(points < 0){
         shoot = 0;
         points = 0;
-        let stringPoints = points.toString()
-        pointsContainer.innerHTML = stringPoints.padStart(5, '0');
+        pointsContainer.innerHTML = "-0000";
     }else{
         plusPnkts();
     }
@@ -175,15 +183,51 @@ function minusPnkt()
 }
 
 function endGame() {
-    // Koniec gry - wyświetlenie wyniku
     zombieContainer.style.display = 'none';
     hpsContainer.style.display = 'none';
     pointsContainer.style.display = 'none';
     resultContainer.style.display = 'flex';
-    let result = document.createElement('div');
-    result.textContent = "Koniec gry. Twój wynik: " + points;
-    resultContainer.appendChild(result);
+    resultContainer.style.flexDirection = 'column';
+
+    let endScore1 = document.createElement('div');
+    endScore1.textContent = "Game Over!";
+    endScore1.style.fontSize = '5vw'; 
+    result.appendChild(endScore1);
+
+    let endScore2 = document.createElement('div');
+    endScore2.textContent = "Score: " + points;
+    endScore2.style.fontSize = '4vw';
+    result.appendChild(endScore2);
+
     clearInterval(spawnInterval);
     cancelAnimationFrame(animateZombie);
     end = 0;
+}
+
+function reGame(){
+    // Zaktualizuj kontener wyników
+    clearResultContainer();
+    // Usuń wszystkie zombie z ekranu
+    removeAllZombies();
+
+    setVariables();
+
+    updateHearts();
+
+    zombieContainer.style.display = 'flex';
+    resultContainer.style.display = 'none';
+
+    startGame();
+}
+
+function clearResultContainer() {
+    while (result.firstChild) {
+        result.removeChild(result.firstChild);
+    }
+}
+
+function removeAllZombies() {
+    // Pobierz wszystkie zombie na ekranie i usuń je
+    let zombies = document.querySelectorAll('.patient0');
+    zombies.forEach(zombie => zombie.remove());
 }

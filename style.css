@@ -37,7 +37,7 @@ body
 
 .startContainer > button:hover
 {
-    cursor: pointer;
+    cursor: url('jpg/aim_scal2.png') 50 50,auto;
 }
 
 .pointsContainer
@@ -113,6 +113,27 @@ body
     border-radius: 4%;
 }
 
+.result
+{
+    width: 100%;
+    height: 50%;
+    color: black;
+    text-align: center;
+}
+
+.endButton > button
+{
+    width: 45vw;
+    height: 20vh;
+    background-color: rgb(64, 4, 141);
+    font-size: 2vw;
+    text-align: center;
+}
+
+.endButton > button:hover
+{
+    cursor: url('jpg/aim_scal2.png') 50 50,auto;
+}
 
 
 
