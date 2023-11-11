@@ -1,7 +1,7 @@
 body
 {
     background-image: url('jpg/board-bg.jpg');
-    background-size: 100vw 100vh;
+    background-size: 100dvw 100dvh;
     overflow: hidden;
     cursor: url('jpg/aim_scal2.png') 50 50,auto;
 }
