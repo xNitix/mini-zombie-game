@@ -4,7 +4,6 @@ body
     background-size: 100vw 100vh;
     overflow: hidden;
     cursor: url('jpg/aim_scal2.png') 50 50,auto;
-    overflow: hidden;
 }
 
 .container
@@ -18,7 +17,7 @@ body
 {
     margin: auto;
     margin-top: 10vw;
-    background-color: rgb(111, 0, 255);
+    background-color: rgb(55, 22, 97);
     width: 50vw;
     height: 50vh;
     align-items: center;
@@ -31,7 +30,7 @@ body
 {
     width: 45vw;
     height: 30vh;
-    background-color: rgb(64, 4, 141);
+    background-color: rgb(141, 4, 120);
     font-size: 2.5vw;
 }
 
@@ -103,7 +102,7 @@ body
 {
     margin: auto;
     margin-top: 10vw;
-    background-color: rgb(111, 0, 255);
+    background-color: rgb(55, 22, 97);
     color: aliceblue;
     width: 50vw;
     height: 50vh;
@@ -125,7 +124,7 @@ body
 {
     width: 45vw;
     height: 20vh;
-    background-color: rgb(64, 4, 141);
+    background-color: rgb(141, 4, 120);
     font-size: 2vw;
     text-align: center;
 }

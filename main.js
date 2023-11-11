@@ -60,7 +60,9 @@ function spawnZombie() {
     let speed = getRandomSpeed();
 
     zombie.style.left = xPos + 'px';
-    zombie.style.marginTop = (100-zombieSize/10-yPos) + 'vh';
+    zombie.style.bottom = yPos + 'vh';
+    zombie.style.zIndex = 999-yPos;
+
     zombie.width = zombieSize;
     zombie.height = zombieSize;
     zombieContainer.appendChild(zombie);
@@ -71,7 +73,7 @@ function spawnZombie() {
 }
 
 function getRandomZombieSize() {
-    return Math.floor(Math.random() * (600 - 100 + 1) + 100);
+    return Math.floor(Math.random() * (500 - 200 + 1) + 200);
 }
 
 function getRandomYPosition() {
