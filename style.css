@@ -3,7 +3,8 @@ body
     background-image: url('jpg/board-bg.jpg');
     background-size: 100vw 100vh;
     overflow: hidden;
-    cursor: url('jpg/aim.png'), auto;
+    cursor: url('jpg/aim_scal2.png') 50 50,auto;
+    overflow: hidden;
 }
 
 .container
@@ -82,9 +83,34 @@ body
     height: 100vh;
 }
 
+.unselectable {
+    user-select: none;
+}
+
 .cursor
 {
     cursor: url('jpg/aim.cur'), auto;
+}
+
+.patient0
+{
+    width: auto;
+    position: absolute;
+    z-index: 999;
+}
+
+.resultContainer
+{
+    margin: auto;
+    margin-top: 10vw;
+    background-color: rgb(111, 0, 255);
+    color: aliceblue;
+    width: 50vw;
+    height: 50vh;
+    align-items: center;
+    justify-content: center;
+    display:none;
+    border-radius: 4%;
 }
 
 
