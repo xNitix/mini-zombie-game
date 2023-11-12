@@ -2,6 +2,7 @@ body
 {
     background-image: url('jpg/board-bg.jpg');
     background-size: 100vw 100vh;
+    background-repeat: no-repeat;
     height: calc(var(--vh, 1vh) * 100);
     overflow: hidden;
     cursor: url('jpg/aim_scal2.png') 50 50,auto;
